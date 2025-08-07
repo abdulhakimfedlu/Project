@@ -4,7 +4,6 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
 
-
 const monaSans = Mona_Sans({
   variable: "--font-mona-sans",
   subsets: ["latin"],
