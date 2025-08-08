@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import Image from "next/image"
 import {toast} from "sonner"
- 
+import  FormField from "@/components/FormField"
 import { Button } from "@/components/ui/button"
 import {Form} from "@/components/ui/form"
 // import { Input } from "@/components/ui/input"
@@ -32,13 +32,18 @@ const AuthForm = ({type}:{type:FormType}) => {
  
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-   try {
-
-   } catch(error){
-    console.log(error);
-    toast.error(`there was an error :${error}`)
-   }
+    try {
+      if (type === 'sign-up') {
+        console.log('SIGN-UP', values);
+      } else {
+        console.log('SIGN-IN', values);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(`there was an error: ${error}`);
+    }
   }
+  
   const isSignIn = type ==="sign-in";
   return (
     <div className="card-border lg:min-w-[566px]" >
@@ -51,7 +56,13 @@ const AuthForm = ({type}:{type:FormType}) => {
       
       <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6 mt-4 form">
-        {!isSignIn &&<p>Name</p>}
+        {!isSignIn && (
+          <FormField 
+          control={form.control} 
+          name="name" 
+          label="Name" 
+          placeholder="Your Name"/>
+        )}
         <p>Email</p>
         <p>Password</p>
         
