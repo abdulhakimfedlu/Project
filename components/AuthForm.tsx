@@ -9,9 +9,11 @@ import { Button } from "@/components/ui/button"
 import {Form} from "@/components/ui/form"
 // import { Input } from "@/components/ui/input"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 
 const authFormSchema = (type: FormType) => {
+  
   return z.object({
     name: type === 'sign-up' ? z.string().min(3) : z.string().optional(),
     email: z.string().email(),
@@ -19,6 +21,7 @@ const authFormSchema = (type: FormType) => {
   });
 };
 const AuthForm = ({type}:{type:FormType}) => {
+  const router = useRouter();
   const formSchema = authFormSchema(type);
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -34,9 +37,11 @@ const AuthForm = ({type}:{type:FormType}) => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       if (type === 'sign-up') {
-        console.log('SIGN-UP', values);
+        toast.success("Account created sucessfully please sign-in");
+        router.push('/sign-in')
       } else {
-        console.log('SIGN-IN', values);
+        toast.success("sign-in sucessfully");
+        router.push('/')
       }
     } catch (error) {
       console.log(error);
@@ -63,8 +68,20 @@ const AuthForm = ({type}:{type:FormType}) => {
           label="Name" 
           placeholder="Your Name"/>
         )}
-        <p>Email</p>
-        <p>Password</p>
+        <FormField 
+          control={form.control} 
+          name="email" 
+          label="Email" 
+          placeholder="Your Email"
+          type="email"
+          />
+        <FormField 
+          control={form.control} 
+          name="password" 
+          label="Password" 
+          placeholder="Enter your Password"
+          type="password"
+          />
         
         <Button className="btn" type="submit"> {isSignIn? "Sign In": "create an account"}</Button>
       </form>
