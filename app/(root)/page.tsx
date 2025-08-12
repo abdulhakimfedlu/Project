@@ -19,11 +19,20 @@ const Page = () => {
         <Image src="/robot.png" alt="robo-dude" width={400} height={400} 
             className="max-sm:hidden"/>
       </section>
-      <section className="flex flex-col gap-6 mt-8" ></section>
+      <section className="flex flex-col gap-6 mt-8" >
       <h2>your interviews</h2>
       <div className="interview-section" >
         <p>you haven&apos; t take any interview yet</p>
       </div>
+      </section>
+      <section className="flex flex-col gap-6 mt-8" >
+        <h2>Take an Interview</h2>
+         <div className="interview-section">
+          <p>
+            There are no interviews available
+          </p>
+         </div>
+      </section>
     </>
   );
 };
