@@ -15,6 +15,7 @@ interface InterviewCardProps {
 interface Feedback {
     createdAt: string;
     totalScore: number;
+    finalAssessment: string;
 }
 
 const InterviewCard = ({ id, userId, role, type, techstack,
@@ -30,7 +31,7 @@ const InterviewCard = ({ id, userId, role, type, techstack,
                 <div className="absolute top-0 right-0 w-fit px-4 py-2 rounded-bl-lg bg-light-600">
                     <p className="badge-text">{normalizedType}</p>
                 </div>
-                <Image src={getRandomInterviewCover()} alt="cover image" width={90}
+                <Image src={getRandomInterviewCover()} alt="cover-image" width={90}
                     height={90} className="rounded-full object-fit size-[90px]" />
                 <h3 className="mt-5 capitalize">
                     {role} interview
@@ -47,8 +48,15 @@ const InterviewCard = ({ id, userId, role, type, techstack,
                         <p>{feedback?.totalScore || '---'}/100</p>
                     </div>
                 </div>
+                <p className="line-clamp-2 mt-5">
+                    {feedback?.finalAssessment || "You haven't taken any interviews yet. Take it now to improve your skills"}
+                </p>
+                <div className="flex flex-row justify-between">
+                <p>Tech icons</p>
 
             </div>
+            </div>
+           
         </div>
     )
 }
