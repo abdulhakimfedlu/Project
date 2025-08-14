@@ -2,6 +2,8 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import Image from 'next/image';
+import { dummyInterviews } from '@/constants';
+import InterviewCard from '@/components/InterviewCard';
 
 const Page = () => {
   return (
@@ -13,25 +15,35 @@ const Page = () => {
             Practice on real interview questions and get instant feedback
           </p>
           <Button asChild className="btn-primary max-sm:w-full">
-          <Link href="/interview">start an interview</Link>
+            <Link href="/interview">start an interview</Link>
           </Button>
         </div>
-        <Image src="/robot.png" alt="robo-dude" width={400} height={400} 
-            className="max-sm:hidden"/>
+        <Image
+          src="/robot.png"
+          alt="robo-dude"
+          width={400}
+          height={400}
+          className="max-sm:hidden"
+        />
       </section>
-      <section className="flex flex-col gap-6 mt-8" >
-      <h2>your interviews</h2>
-      <div className="interview-section" >
-        <p>you haven&apos; t take any interview yet</p>
-      </div>
+
+      <section className="flex flex-col gap-6 mt-8">
+        <h2>your interviews</h2>
+        <div className="interviews-section">
+          {dummyInterviews.map((interview) => (
+            <InterviewCard {...interview} key={interview.id} />
+          ))}
+          {/* <p>you haven&apos;t take any interviews yet</p> */}
+        </div>
       </section>
-      <section className="flex flex-col gap-6 mt-8" >
+
+      <section className="flex flex-col gap-6 mt-8">
         <h2>Take an Interview</h2>
-         <div className="interview-section">
-          <p>
-            There are no interviews available
-          </p>
-         </div>
+        <div className="interviews-section">
+          {dummyInterviews.map((interview) => (
+            <InterviewCard {...interview} key={interview.id} />
+          ))}
+        </div>
       </section>
     </>
   );
