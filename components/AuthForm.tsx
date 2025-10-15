@@ -12,7 +12,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase/client";
-import { signUp, signIn } from "@/lib/actions/user.actions"; // ✅ make sure both exist
+import { signUp, signIn } from "@/lib/actions/auth.action"; 
+// ✅ make sure both exist
 
 // Validation schema depending on form type
 const authFormSchema = (type: FormType) => {
